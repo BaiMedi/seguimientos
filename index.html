@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramienta de Seguimiento</title>
+    <style>
+        body {
+            font-family: "Arimo", sans-serif;
+            background-color: #E5EBF4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #22C0DC;
+            text-align: center;
+        }
+        .task {
+            margin: 20px 0;
+        }
+        .task input[type="text"], .task input[type="date"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .task input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .suggestions {
+            margin-top: 20px;
+            background: #F9F9F9;
+            padding: 15px;
+            border-left: 4px solid #01BD39;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .cta-button {
+            padding: 10px 20px;
+            background-color: #01BD39;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            background-color: #019E2D;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Herramienta de Seguimiento de Clientes</h1>
+        <div id="task-list">
+            <div class="task">
+                <label>
+                    <input type="checkbox" class="task-checkbox">
+                    <input type="text" class="task-name" placeholder="Escribe el nombre del cliente o tarea">
+                </label>
+                <input type="date" class="task-date" placeholder="Fecha (dd/mm/aaaa)">
+            </div>
+        </div>
+        <button onclick="addTask()">Agregar tarea</button>
+
+        <div class="suggestions" id="suggestions">
+            <h2>Sugerencias y Planes</h2>
+            <p>Introduce información para obtener recomendaciones.</p>
+        </div>
+
+        <div class="button-container">
+            <a href="https://klicana.work/Ecpzgd" class="cta-button">
+                SÍ! INSCRIBIRME EN “ASISTENTE VIRTUAL EN 14 DÍAS”
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const taskList = document.getElementById('task-list');
+        const suggestions = document.getElementById('suggestions');
+
+        function addTask() {
+            const task = document.createElement('div');
+            task.classList.add('task');
+            task.innerHTML = `
+                <label>
+                    <input type="checkbox" class="task-checkbox">
+                    <input type="text" class="task-name" placeholder="Escribe el nombre del cliente o tarea">
+                </label>
+                <input type="date" class="task-date" placeholder="Fecha (dd/mm/aaaa)">
+            `;
+            taskList.appendChild(task);
+        }
+
+        taskList.addEventListener('input', () => {
+            const taskNames = Array.from(document.querySelectorAll('.task-name'))
+                .map(input => input.value.trim())
+                .filter(name => name);
+            
+            if (taskNames.length > 0) {
+                suggestions.innerHTML = `
+                    <h2>Sugerencias y Planes</h2>
+                    <ul>
+                        ${taskNames.map(name => `<li>Revisar progreso semanal con ${name}. Asegúrate de cumplir plazos clave.</li>`).join('')}
+                    </ul>
+                    <p>Consejo: Usa colores consistentes en tu comunicación para generar confianza con ${taskNames.join(', ')}.</p>
+                `;
+            } else {
+                suggestions.innerHTML = '<h2>Sugerencias y Planes</h2><p>Introduce información para obtener recomendaciones.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
